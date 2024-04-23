@@ -1,5 +1,6 @@
 # flake8: noqa
 
+import joblib
 import numpy as np
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
 
@@ -61,6 +62,10 @@ def process_data(
         lb = LabelBinarizer()
         X_categorical = encoder.fit_transform(X_categorical)
         y = lb.fit_transform(y.values).ravel()
+
+        # Save the encoder and label binarizer
+        joblib.dump(encoder, "./../model/encoder.pkl")
+        joblib.dump(lb, "./../model/lb.pkl")
     else:
         X_categorical = encoder.transform(X_categorical)
         try:

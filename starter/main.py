@@ -1,8 +1,11 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile
+import joblib
+import pandas as pd
 from pydantic import BaseModel, Field
 from typing import List
-from starter.ml.model import inference
 from joblib import load
+
+from starter.ml.data import process_data
 
 
 class Data(BaseModel):
@@ -18,7 +21,38 @@ def read_root():
 
 
 @app.post("/predict")
-def predict(data: Data):
+async def predict(file: UploadFile = File(...)):
+    # Read the CSV file into a pandas DataFrame
+    df = pd.read_csv(file.file)
+
+    # Define the categorical features
+    cat_features = [
+        "workclass",
+        "education",
+        "marital-status",
+        "occupation",
+        "relationship",
+        "race",
+        "sex",
+        "native-country",
+    ]
+
+    # Process the data
+    encoder = joblib.load("./model/encoder.pkl")
+    lb = joblib.load("./model/lb.pkl")
+    X, _, _, _ = process_data(
+        df,
+        categorical_features=cat_features,
+        label="salary",
+        training=False,
+        encoder=encoder,
+        lb=lb,
+    )
+
+    # Load model
     model = load("./model/trained_model.pkl")
-    prediction = inference(model, data.features)
-    return {"prediction": prediction}
+
+    # Perform inference on the processed data
+    predictions = model.predict(X)
+
+    return {"predictions": predictions.tolist()}
