@@ -1,3 +1,7 @@
+import joblib
+import numpy as np
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 
 
@@ -17,9 +21,39 @@ def train_model(X_train, y_train):
     model
         Trained machine learning model.
     """
+    model = RandomForestClassifier()
+    model.fit(X_train, y_train)
+    return model
 
-    pass
+def save_model(model, output_path):
+    """
+    Stores a machine learning model to a file.
 
+    Parameters
+    ----------
+    model : ???
+        Trained machine learning model.
+    output_path : str
+        The path to the file where the model should be stored.
+    """
+    joblib.dump(model, output_path)
+
+def load_model(model_path):
+    """
+    Loads a machine learning model from a file.
+
+    Parameters
+    ----------
+    model_path : str
+        The path to the file containing the model.
+
+    Returns
+    -------
+    model
+        The loaded machine learning model.
+    """
+    model = joblib.load(model_path)
+    return model
 
 def compute_model_metrics(y, preds):
     """
@@ -57,4 +91,5 @@ def inference(model, X):
     preds : np.array
         Predictions from the model.
     """
-    pass
+    return model.predict(X)
+
