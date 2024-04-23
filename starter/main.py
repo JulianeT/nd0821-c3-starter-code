@@ -1,18 +1,31 @@
-from fastapi import FastAPI, File, UploadFile
+from fastapi import Body, FastAPI
 import joblib
+import numpy as np
 import pandas as pd
-from pydantic import BaseModel, Field
-from typing import List
+from pydantic import BaseModel
 from joblib import load
 
 from starter.ml.data import process_data
 
 
-class Data(BaseModel):
-    features: List[float] = Field(..., example=[0.1, 0.2, 0.3, 0.4])
-
-
 app = FastAPI()
+
+
+class Data(BaseModel):
+    age: int
+    capital_gain: int
+    capital_loss: int
+    education: str
+    education_num: int
+    fnlgt: int
+    hours_per_week: int
+    marital_status: str
+    native_country: str
+    occupation: str
+    race: str
+    relationship: str
+    sex: str
+    workclass: str
 
 
 @app.get("/")
@@ -21,20 +34,20 @@ def read_root():
 
 
 @app.post("/predict")
-async def predict(file: UploadFile = File(...)):
-    # Read the CSV file into a pandas DataFrame
-    df = pd.read_csv(file.file)
+async def predict(data: Data = Body(...)):
+    # Convert the data into a pandas DataFrame
+    df = pd.DataFrame([dict(data)])
 
     # Define the categorical features
     cat_features = [
         "workclass",
         "education",
-        "marital-status",
+        "marital_status",
         "occupation",
         "relationship",
         "race",
         "sex",
-        "native-country",
+        "native_country",
     ]
 
     # Process the data
@@ -43,16 +56,18 @@ async def predict(file: UploadFile = File(...)):
     X, _, _, _ = process_data(
         df,
         categorical_features=cat_features,
-        label="salary",
+        label=None,
         training=False,
         encoder=encoder,
         lb=lb,
     )
 
-    # Load model
     model = load("./model/trained_model.pkl")
 
     # Perform inference on the processed data
     predictions = model.predict(X)
 
-    return {"predictions": predictions.tolist()}
+    label_map = {0: "<=50K", 1: ">50K"}
+    predictions = np.array([label_map[pred] for pred in predictions])
+
+    return {"salary": predictions.tolist()}
