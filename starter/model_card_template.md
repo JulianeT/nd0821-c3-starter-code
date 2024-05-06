@@ -14,10 +14,13 @@ This model is intended to predict the salary of individuals based on various fea
 The model was trained on a dataset containing various features of individuals, such as their education level, years of experience, and job role. The dataset was collected in a manner that ensures a diverse and representative sample of the population.
 
 ## Evaluation Data
-The model was evaluated on a separate dataset that was not used during training. This dataset was also collected in a manner that ensures a diverse and representative sample of the population.
+The model was evaluated on a separate dataset that was not used during training. This dataset was also collected in a manner that ensures a diverse and representative sample of the population. For this purpose, the provided data set was divided into a training- and a test-set. The size of the test set is 20% of the provided data.
 
 ## Metrics
-The model's performance was evaluated using accuracy as the primary metric.
+The model's performance was evaluated using f1, precisiiion and recall as primary metrics and achieved the following scores:
+- F1-score: 0.53
+- Precision: 0.77
+- Recall: 0.47
 
 ## Ethical Considerations
 We have taken steps to ensure that the model does not perpetuate harmful biases. However, as with any machine learning model, there is a risk that it may unintentionally reinforce existing societal biases present in the training data.
