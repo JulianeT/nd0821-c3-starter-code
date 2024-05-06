@@ -40,21 +40,20 @@ X_train, y_train, encoder, lb = process_data(
 model = train_model(X_train, y_train)
 save_model(model, "../model/trained_model.pkl")
 
-# Evaluate model for the education feature
+
+# Evaluate model on the test set
 with open("../model/slice_output.txt", "w") as f:
-    for value in test["education"].unique():
-        df_slice = test[test["education"] == value]
-        X_slice, y_slice, _, _ = process_data(
-            df_slice,
-            categorical_features=cat_features,
-            label="salary",
-            training=False,
-            encoder=encoder,
-            lb=lb,
-        )
-        predictions = inference(model, X_slice)
-        precision, recall, fbeta = compute_model_metrics(y_slice, predictions)
-        f.write(
-            f"Metrics for education={value}: "
-            f"Precistion={precision}, Recall={recall}, F1={fbeta}\n"
-        )
+    X_slice, y_slice, _, _ = process_data(
+        test,
+        categorical_features=cat_features,
+        label="salary",
+        training=False,
+        encoder=encoder,
+        lb=lb,
+    )
+    predictions = inference(model, X_slice)
+    precision, recall, fbeta = compute_model_metrics(y_slice, predictions)
+    f.write(
+        f"Model metrics: "
+        f"Precision={precision}, Recall={recall}, F1={fbeta}\n"
+    )

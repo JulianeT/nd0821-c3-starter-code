@@ -1,16 +1,1 @@
-Metrics for education=HS-grad: Precistion=0.6161137440758294, Recall=0.39156626506024095, F1=0.47882136279926335
-Metrics for education=Some-college: Precistion=0.6813725490196079, Recall=0.5036231884057971, F1=0.5791666666666667
-Metrics for education=10th: Precistion=0.42857142857142855, Recall=0.21428571428571427, F1=0.2857142857142857
-Metrics for education=7th-8th: Precistion=1.0, Recall=0.25, F1=0.4
-Metrics for education=9th: Precistion=1.0, Recall=0.0, F1=0.0
-Metrics for education=1st-4th: Precistion=1.0, Recall=0.0, F1=0.0
-Metrics for education=Bachelors: Precistion=0.7651331719128329, Recall=0.7117117117117117, F1=0.7374562427071178
-Metrics for education=Masters: Precistion=0.8578947368421053, Recall=0.8232323232323232, F1=0.8402061855670103
-Metrics for education=Assoc-acdm: Precistion=0.7647058823529411, Recall=0.6290322580645161, F1=0.6902654867256637
-Metrics for education=12th: Precistion=1.0, Recall=0.25, F1=0.4
-Metrics for education=Prof-school: Precistion=0.8823529411764706, Recall=0.9375, F1=0.9090909090909091
-Metrics for education=11th: Precistion=1.0, Recall=0.3333333333333333, F1=0.5
-Metrics for education=Assoc-voc: Precistion=0.660377358490566, Recall=0.5072463768115942, F1=0.5737704918032787
-Metrics for education=Doctorate: Precistion=0.7857142857142857, Recall=0.9482758620689655, F1=0.859375
-Metrics for education=5th-6th: Precistion=1.0, Recall=0.0, F1=0.0
-Metrics for education=Preschool: Precistion=1.0, Recall=1.0, F1=1.0
+Model metrics: Precision=0.7546746447270007, Recall=0.6418575063613231, F1=0.6937091784118253

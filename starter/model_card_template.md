@@ -18,9 +18,9 @@ The model was evaluated on a separate dataset that was not used during training.
 
 ## Metrics
 The model's performance was evaluated using f1, precisiiion and recall as primary metrics and achieved the following scores:
-- F1-score: 0.53
-- Precision: 0.77
-- Recall: 0.47
+- F1-score: 0.69
+- Precision: 0.75
+- Recall: 0.64
 
 ## Ethical Considerations
 We have taken steps to ensure that the model does not perpetuate harmful biases. However, as with any machine learning model, there is a risk that it may unintentionally reinforce existing societal biases present in the training data.
