@@ -5,7 +5,7 @@ import pandas as pd
 from pydantic import BaseModel
 from joblib import load
 
-from starter.ml.data import process_data
+from starter.starter.ml.data import process_data
 
 
 app = FastAPI()
@@ -51,8 +51,8 @@ async def predict(data: Data = Body(...)):
     ]
 
     # Process the data
-    encoder = joblib.load("./model/encoder.pkl")
-    lb = joblib.load("./model/lb.pkl")
+    encoder = joblib.load("./starter/model/encoder.pkl")
+    lb = joblib.load("./starter/model/lb.pkl")
     X, _, _, _ = process_data(
         df,
         categorical_features=cat_features,
@@ -62,7 +62,7 @@ async def predict(data: Data = Body(...)):
         lb=lb,
     )
 
-    model = load("./model/trained_model.pkl")
+    model = load("./starter/model/trained_model.pkl")
 
     # Perform inference on the processed data
     predictions = model.predict(X)

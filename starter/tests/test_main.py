@@ -1,8 +1,6 @@
 import pytest
-from fastapi import FastAPI
 from fastapi.testclient import TestClient
-
-app = FastAPI()
+from starter.main import app
 
 
 @pytest.fixture
@@ -18,12 +16,48 @@ def test_read_root(client):
 
 
 def test_prediction_endpoint_for_class_0(client):
-    response = client.post("/predict", json={"features": [0.1, 0.2, 0.3, 0.4]})
+    response = client.post(
+        "/predict",
+        json={
+            "age": 39,
+            "capital_gain": 2174,
+            "capital_loss": 0,
+            "education": "Bachelors",
+            "education_num": 13,
+            "fnlgt": 77516,
+            "hours_per_week": 40,
+            "marital_status": "Never-married",
+            "native_country": "United-States",
+            "occupation": "Adm-clerical",
+            "race": "white",
+            "relationship": "Not-in-family",
+            "sex": "Male",
+            "workclass": "State-gov",
+            }
+        )
     assert response.status_code == 200
-    assert response.json()["prediction"] == 0
+    assert response.json() == {'salary': ['<=50K']}
 
 
 def test_prediction_endpoint_for_class_1(client):
-    response = client.post("/predict", json={"features": [0.5, 0.6, 0.7, 0.8]})
+    response = client.post(
+        "/predict",
+        json={
+            "age": 52,
+            "capital_gain": 0,
+            "capital_loss": 0,
+            "education": "HS-grad",
+            "education_num": 9,
+            "fnlgt": 209642,
+            "hours_per_week": 45,
+            "marital_status": "Married-civ-spouse",
+            "native_country": "United-States",
+            "occupation": "Exec-managerial",
+            "race": "White",
+            "relationship": "Husband",
+            "sex": "Male",
+            "workclass": "Self-emp-not-inc",
+            }
+        )
     assert response.status_code == 200
-    assert response.json()["prediction"] == 1
+    assert response.json() == {'salary': ['>50K']}
