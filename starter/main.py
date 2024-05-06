@@ -12,6 +12,7 @@ model = joblib.load("./starter/model/trained_model.pkl")
 encoder = joblib.load("./starter/model/encoder.pkl")
 binarizer = joblib.load("./starter/model/lb.pkl")
 
+
 def hyphen_to_underscore(field_name):
     return f"{field_name}".replace("_", "-")
 
@@ -33,8 +34,8 @@ class Data(BaseModel):
     workclass: str = Field(default="State-gov")
 
     class Config:
-            alias_generator = hyphen_to_underscore
-            allow_population_by_field_name = True
+        alias_generator = hyphen_to_underscore
+        allow_population_by_field_name = True
 
 
 @app.get("/")
