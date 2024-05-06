@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 from sklearn.datasets import make_classification
-from starter.ml.model import train_model, compute_model_metrics, inference
+from starter.starter.ml.model import train_model, compute_model_metrics, inference
 
 
 @pytest.fixture
