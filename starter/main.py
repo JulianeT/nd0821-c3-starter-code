@@ -8,7 +8,9 @@ from starter.starter.ml.data import process_data
 
 
 app = FastAPI()
-
+model = None
+encoder = None
+binarizer = None
 
 def hyphen_to_underscore(field_name):
     return f"{field_name}".replace("_", "-")
@@ -36,7 +38,7 @@ class Data(BaseModel):
 
 
 @app.on_event("startup")
-async def startup_event(): 
+def startup_event(): 
     global model, encoder, binarizer
     model = joblib.load("./starter/model/trained_model.pkl")
     encoder = joblib.load("./starter/model/encoder.pkl")
