@@ -1,3 +1,4 @@
+# flake8: noqa
 import requests
 
 data = {
@@ -17,5 +18,9 @@ data = {
     "workclass": "State-gov",
 }
 
-response = requests.post("http://127.0.0.1:8000/predict", json=data)
-print(response.json())
+response = requests.post(
+    "https://nd0821-c3-starter-code-c9l2.onrender.com/predict",
+    json=data,
+)
+print("Status code:", response.status_code)
+print("Result of the model inference:", response.json())
