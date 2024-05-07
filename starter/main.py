@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 from pydantic import BaseModel, Field
 
-from starter.ml.data import process_data
+from starter.starter.ml.data import process_data
 
 
 app = FastAPI()
