@@ -4,13 +4,13 @@ import numpy as np
 import pandas as pd
 from pydantic import BaseModel, Field
 
-from starter.starter.ml.data import process_data
+from starter.ml.data import process_data
 
 
 app = FastAPI()
-model = joblib.load("./starter/model/trained_model.pkl")
-encoder = joblib.load("./starter/model/encoder.pkl")
-binarizer = joblib.load("./starter/model/lb.pkl")
+model = joblib.load("./model/trained_model.pkl")
+encoder = joblib.load("./model/encoder.pkl")
+binarizer = joblib.load("./model/lb.pkl")
 
 
 def hyphen_to_underscore(field_name):
